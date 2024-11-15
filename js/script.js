@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let songs = [];
     let currentSongIndex = 0;
     let score = 0;
-    let timeLeft = 20;
+    let timeLeft = 60;
     let timer;
 
     // 페이지 초기 상태 설정 (년도 선택 페이지만 보이도록)
