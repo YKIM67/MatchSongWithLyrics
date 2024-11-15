@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노래 맞추기 게임</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 년도 선택 화면 -->
+    <div id="year-selection-page" class="page active">
+        <h1>년도별 차트 선택</h1>
+        <select id="year-select">
+            <option value="2015">2015년</option>
+            <!-- <option value="2023">2023년</option> -->
+        </select>
+        <button id="start-game">게임 시작</button>
+    </div>
+
+    <!-- 게임 진행 화면 -->
+    <div id="game-page" class="page">
+        <h2>노래 제목 맞추기</h2>
+        <p id="lyrics">노래 가사가 나타납니다.</p>
+        
+        <input type="text" id="answer" placeholder="노래 제목을 입력하세요">
+        
+        <!-- 버튼 영역을 따로 분리 -->
+        <div class="button-container">
+            <button id="submit-answer">제출</button>
+            <button id="skip">건너뛰기</button>
+        </div>
+
+        <p>남은 시간: <span id="timer">20</span>초</p>
+        <p>점수: <span id="score">0</span></p>
+    </div>
+
+    <!-- 결과 화면 -->
+    <div id="result-page" class="page">
+        <h2>결과 페이지</h2>
+        <p>최종 점수: <span id="final-score">0</span></p>
+        <input type="text" id="player-name" placeholder="이름을 입력하세요">
+        <button id="submit-score">점수 제출</button>
+    </div>
+
+    <!-- 순위 확인 페이지 -->
+    <div id="ranking-page" class="page">
+        <h2>점수 확인</h2>
+        <p>최종 점수가 여기에 표시됩니다.</p>
+        <ul id="ranking-list"></ul>
+        <button id="go-home">처음으로</button>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
