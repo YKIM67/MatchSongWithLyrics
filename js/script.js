@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     let timeLeft = 60;
     let timer;
+    let consecutiveCorrect = 0; // 연속 정답 카운터
 
     // 페이지 초기 상태 설정 (년도 선택 페이지만 보이도록)
     yearSelectionPage.classList.add('active');
@@ -67,9 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
     submitAnswerButton.addEventListener('click', () => {
         const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
         if (userAnswer === songs[currentSongIndex].title.toLowerCase()) {
-            score += 10;
+            score += 10 + consecutiveCorrect; // 연속 정답 카운터
+            consecutiveCorrect++ // 연속 정답 카운터
             currentSongIndex++;
         } else {
+            consecutiveCorrect = 0; // 연속 정답 카운터
             wrongAnswer();
         }
         
