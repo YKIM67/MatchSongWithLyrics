@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalScoreElement = document.getElementById('final-score');
     const submitAnswerButton = document.getElementById('submit-answer');
     const skipButton = document.getElementById('skip');
+    const answerInput = document.getElementById('answer');
     
     let songs = [];
     let currentSongIndex = 0;
@@ -67,9 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userAnswer === songs[currentSongIndex].title.toLowerCase()) {
             score += 10;
             currentSongIndex++;
+        } else {
+            wrongAnswer();
         }
+        
+        // 조건과 상관없이 항상 실행되어야 하는 코드
         scoreElement.textContent = score;
-        document.getElementById('answer').value = ""; // 입력창 초기화
+        answer.value = ""; // 입력창 초기화
         displayLyrics();
     });
 
@@ -130,4 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedYear = document.getElementById('year-select').value;
         loadSongs(selectedYear);
     });
+    // 정답제출시 오답일때 그래픽 효과
+    function wrongAnswer() {
+        answerInput.classList.add('blink');
+        setTimeout(() => {
+            answerInput.classList.remove('blink');
+        }, 1000);  // 애니메이션이 끝난 후 클래스 제거
+    }
 });
