@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startGame() {
         yearSelectionPage.classList.remove('active');  // 년도 선택 페이지 숨김
         gamePage.classList.add('active');  // 게임 페이지 표시
+        shuffle(songs);
         displayLyrics();
         startTimer();
     }
@@ -141,5 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             answerInput.classList.remove('blink');
         }, 1000);  // 애니메이션이 끝난 후 클래스 제거
+    }
+    // 배열을 무작위로 섞기
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 });
