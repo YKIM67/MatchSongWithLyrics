@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const skipButton = document.getElementById('skip');
     const answerInput = document.getElementById('answer');
     
+    let rankings = JSON.parse(localStorage.getItem('rankings')) || [];  // 점수 순위를 저장하기 위한 배열
     let songs = [];
     let currentSongIndex = 0;
     let score = 0;
@@ -119,11 +120,22 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('이름을 입력하세요.');
             return;
         }
+        
+        // 점수와 이름을 순위 배열에 추가
+        rankings.push({ name: playerName, score: score });
+  
+        // 점수를 내림차순으로 정렬
+        rankings.sort((a, b) => b.score - a.score);
 
+        // 순위 리스트를 업데이트
+        updateRankingList();
+
+        // 로컬 저장소에 순위를 저장
+        localStorage.setItem('rankings', JSON.stringify(rankings));
         // 순위 리스트에 추가 (간단한 순위 예시)
-        const listItem = document.createElement('li');
-        listItem.textContent = `${playerName}: ${score}점`;
-        document.getElementById('ranking-list').appendChild(listItem);
+        // const listItem = document.createElement('li');
+        // listItem.textContent = `${playerName}: ${score}점`;
+        // document.getElementById('ranking-list').appendChild(listItem);
 
         resultPage.classList.remove('active');
         rankingPage.classList.add('active');
@@ -152,5 +164,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+    }
+    // 순위 리스트 업데이트 함수
+    function updateRankingList() {
+        const rankingList = document.getElementById('ranking-list');
+        rankingList.innerHTML = ''; // 기존 리스트를 초기화
+  
+        rankings.forEach((entry, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${index + 1}. ${entry.name}: ${entry.score}점`;
+            rankingList.appendChild(listItem);
+        });
+
+        // 페이지가 로드될 때 순위 리스트 업데이트
+        document.addEventListener('DOMContentLoaded', () => {
+        updateRankingList();
+        });
     }
 });
