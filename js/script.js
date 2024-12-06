@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 정답 제출 버튼 클릭
     submitAnswerButton.addEventListener('click', () => {
         const userAnswer = document.getElementById('answer').value.replace(/\s+/g, '').toLowerCase();
-        if (userAnswer === songs[currentSongIndex].title || userAnswer === songs[currentSongIndex].title2) {
+        if (userAnswer === songs[currentSongIndex].title.trim().toLowerCase() || userAnswer === songs[currentSongIndex].title2.trim().toLowerCase()) {
             score += 10 + consecutiveCorrect; // 연속 정답 카운터
             consecutiveCorrect++ 
             currentSongIndex++;
@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 방향키로 건너뛰기 기능 추가
+    // 스페이스바로 건너뛰기 기능 추가
     document.addEventListener('keydown', (event) => {
-        if (event.key === '`') {    // `로 변경
-            event.preventDefault(); // 스페이스바의 기본 동작(스크롤)을 방지
+        if (event.key === 'Shift') {    // 시프트바로 변경
+            //event.preventDefault(); // 스페이스바의 기본 동작(스크롤)을 방지
             skipButton.click(); // 시프트바를 눌렀을 때 건너뛰기 버튼 클릭 동작 실행
         }
     });
